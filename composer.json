@@ -1,0 +1,40 @@
+{
+    "name": "atasvr/onesignal",
+    "description": "Onesignal push Notification api",
+    "keywords": ["onesignal", "webpush", "push", "laravel", "laravel 5"],
+    "type": "library",
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "^6.2|^7.4.1|^7.2|^7.7",
+        "illuminate/support": "~5.5|~6.0|~7.0|~8.0|~9.0|^10.0",
+        "symfony/psr-http-message-bridge": "1.*|2.*"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^2.2|^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Atasvr\\OneSignal\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Atasvr\\OneSignal\\OneSignalServiceProvider"
+            ],
+            "aliases": {
+                "OneSignal": "Atasvr\\OneSignal\\OneSignalFacade"
+            }
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hakan ATASEVER",
+            "email": "soft@atasvr.com",
+            "homepage": "http://atasvr.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
