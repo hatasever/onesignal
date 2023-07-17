@@ -1,5 +1,5 @@
 {
-    "name": "atasvr/onesignal",
+    "name": "hatasvr/onesignal",
     "description": "Onesignal push Notification api",
     "keywords": ["onesignal", "webpush", "push", "laravel", "laravel 5"],
     "type": "library",
