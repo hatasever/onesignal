@@ -1,5 +1,5 @@
 {
-    "name": "atasvr/onesignal",
+    "name": "hatasever/onesignal",
     "description": "Onesignal push Notification api",
     "keywords": ["onesignal", "webpush", "push", "laravel", "laravel 5"],
     "type": "library",
@@ -14,16 +14,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Atasvr\\OneSignal\\": "src/"
+            "Hatasever\\OneSignal\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Atasvr\\OneSignal\\OneSignalServiceProvider"
+                "Hatasever\\OneSignal\\OneSignalServiceProvider"
             ],
             "aliases": {
-                "OneSignal": "Atasvr\\OneSignal\\OneSignalFacade"
+                "OneSignal": "Hatasever\\OneSignal\\OneSignalFacade"
             }
         }
     },
