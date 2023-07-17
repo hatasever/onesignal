@@ -1,6 +1,6 @@
 <?php
 
-namespace Atasvr\OneSignal;
+namespace Hatasever\OneSignal;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
