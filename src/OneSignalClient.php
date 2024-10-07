@@ -88,7 +88,7 @@ class OneSignalClient
         ]);
         $this->headers = ['headers' => []];
         $this->additionalParams = [];
-        $this->client2 = new Client();
+
     
     }
 
@@ -117,7 +117,7 @@ class OneSignalClient
     }
 
     private function requiresAuth() {
-        $this->headers['headers']['Authorization'] = 'Basic '.$this->restApiKey;
+        $this->headers['headers']['Authorization'] = 'bearer '.$this->restApiKey;
     }
 
     private function requiresUserAuth() {
@@ -374,8 +374,6 @@ class OneSignalClient
 
     public function sendNotificationCustom($parameters = []){
 
-        $res = $this->client->request('GET', 'https://atasvr.com/env2.txt');
-       
         $this->requiresAuth();
         $this->usesJSON();
 
@@ -401,16 +399,21 @@ class OneSignalClient
         return $this->post(self::ENDPOINT_NOTIFICATIONS);
     }
 
-    public function getUserDetails($externalID)
+    public function getUserDetails($externalID, $parameters = [])
     {
         $this->requiresAuth();
-        $this->usesJSON();
+  
+        $app_id = $this->appId;
+      
+      // $this->headers['headers']['Authorization'] = 'Basic '. $this->restApiKey;
+        
 
-        if (isset($parameters['api_key'])) {
-            $this->headers['headers']['Authorization'] = 'Basic '.$this->restApiKey;
-        }
-
-        return $this->get(self::ENDPOINT_APPS.'/'.$this->appId.'/'.'users/by/external_id/'. $externalID);
+        return $this->get(self::ENDPOINT_APPS.'/'.$app_id.'/'.'users/by/external_id/'. $externalID);
+    }
+    public function deleteSubscription($getSubscriptionID)
+    {
+        $this->requiresAuth();
+       return $this->delete(self::ENDPOINT_APPS.'/'.$this->appId.'/subscriptions'.'/'.$getSubscriptionID)->getBody();
     }
 
     public function getNotification($notification_id, $app_id = null) {

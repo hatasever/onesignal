@@ -3,6 +3,7 @@
 namespace Hatasever\OneSignal;
 
 use Illuminate\Support\ServiceProvider;
+use Hatasever\OneSignal\OneSignalClient;
 
 class OneSignalServiceProvider extends ServiceProvider
 {
@@ -13,14 +14,14 @@ class OneSignalServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/../config/onesignal.php';
+        $configPath = __DIR__ . '/../config/one-signal.php';
 
-        $this->publishes([$configPath => config_path('onesignal.php')], 'config');
-        $this->mergeConfigFrom($configPath, 'onesignal');
+        $this->publishes([$configPath => config_path('one-signal.php')], 'config');
+        $this->mergeConfigFrom($configPath, 'one-signal');
 
-        if ($this->app instanceof Laravel\Lumen\Application) {
-            $this->app->configure('onesignal');
-        }
+        // if ($this->app instanceof Laravel\Lumen\Application) {
+        //     $this->app->configure('one-signal');
+        // }
 
     }
 
@@ -33,21 +34,28 @@ class OneSignalServiceProvider extends ServiceProvider
     {
 
 
-        $this->app->singleton('onesignal', function ($app) {
+        $this->app->singleton('one-signal', function ($app) {
 
 
-            $config = isset($app['config']['onesignal']) ? $app['config']['onesignal'] : null;
+            $config = isset($app['config']['one-signal']) ? $app['config']['one-signal'] : null;
             if (is_null($config)) {
-                $config = $app['config']['onesignal'] ?: $app['config']['onesignal::config'];
+                $config = $app['config']['one-signal'] ?: $app['config']['one-signal::config'];
             }
 
             return new OneSignalClient($config['app_id'], $config['rest_api_key'], $config['user_auth_key'] , $config['guzzle_client_timeout']);
         });
 
-        $this->app->alias('onesignal', 'Atasvr\OneSignal\OneSignalClient');
+        // $this->app->bind('onesignal', function($app) {
+        //     $config = isset($app['config']['onesignal']) ? $app['config']['onesignal'] : null;
+        //     if (is_null($config)) {
+        //         $config = $app['config']['onesignal'] ?: $app['config']['onesignal::config'];
+        //     }
+        //     return new OneSignalClient($config['app_id'], $config['rest_api_key'], $config['user_auth_key'] , $config['guzzle_client_timeout']);
+        // });
+        // $this->app->alias('onesignal', \Hatasever\OneSignal\OneSignalClient::class);
     }
 
-    public function provides() {
-        return ['onesignal'];
-    }
+    // public function provides() {
+    //     return ['onesignal'];
+    // }
 }
