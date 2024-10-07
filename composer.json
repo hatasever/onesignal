@@ -35,6 +35,7 @@
             "homepage": "http://atasvr.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "version": "1.0.1",
     "prefer-stable": true
 }
