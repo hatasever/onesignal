@@ -117,7 +117,7 @@ class OneSignalClient
     }
 
     private function requiresAuth() {
-        $this->headers['headers']['Authorization'] = 'bearer '.$this->restApiKey;
+        $this->headers['headers']['Authorization'] = 'Basic '.$this->restApiKey;
     }
 
     private function requiresUserAuth() {
@@ -378,7 +378,7 @@ class OneSignalClient
         $this->usesJSON();
 
         if (isset($parameters['api_key'])) {
-            $this->headers['headers']['Authorization'] = 'Basic '.$parameters['api_key'];
+            $this->headers['headers']['Authorization'] = 'bearer '. $this->restApiKey;
         }
 
         // Make sure to use app_id
