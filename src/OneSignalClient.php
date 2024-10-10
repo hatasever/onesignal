@@ -401,7 +401,9 @@ class OneSignalClient
 
     public function getUserDetails($externalID, $parameters = [])
     {
-        $this->requiresAuth();
+        $this->headers['headers']['Authorization'] = 'Bearer '. $this->restApiKey;
+        $this->usesJSON(); 
+       // $this->requiresAuth();
   
         $app_id = $this->appId;
       
