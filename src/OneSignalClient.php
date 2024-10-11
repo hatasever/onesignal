@@ -418,6 +418,16 @@ class OneSignalClient
        return $this->delete(self::ENDPOINT_APPS.'/'.$this->appId.'/subscriptions'.'/'.$getSubscriptionID)->getBody();
     }
 
+    public function DeleteUser($externalID)
+    {
+        $this->requiresAuth();
+
+        // $this->headers['body'] = array(
+        //     "type" => 'AndroidPush'
+        // );
+        return $this->delete(self::ENDPOINT_APPS.'/'.$this->appId.'/users/by/external_id/'.$externalID);
+    }
+
     public function getNotification($notification_id, $app_id = null) {
         $this->requiresAuth();
         $this->usesJSON();
